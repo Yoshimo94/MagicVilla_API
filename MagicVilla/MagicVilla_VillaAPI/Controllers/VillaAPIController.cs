@@ -149,20 +149,22 @@ namespace MagicVilla_VillaAPI.Controllers
             }
             var villa = _db.Villas.AsNoTracking().FirstOrDefault(u => u.Id == id);
 
+            if (villa == null)
+            {
+                return BadRequest();
+            }
+
             VillaDTO villaDTO = new()
             {
                 Amenity = villa.Amenity,
                 Details = villa.Details,
                 Id = villa.Id,
+                Name = villa.Name,
                 ImageUrl = villa.ImageUrl,
                 Occupancy = villa.Occupancy,
                 Rate = villa.Rate,
                 Sqft = villa.Sqft
             };
-            if (villa == null)
-            {
-                return BadRequest();
-            }
             patchDTO.ApplyTo(villaDTO, ModelState);
 
             Villa model = new()
@@ -170,6 +172,7 @@ namespace MagicVilla_VillaAPI.Controllers
                 Amenity = villaDTO.Amenity,
                 Details = villaDTO.Details,
                 Id = villaDTO.Id,
+                Name = villaDTO.Name,
                 ImageUrl = villaDTO.ImageUrl,
                 Occupancy = villaDTO.Occupancy,
                 Rate = villaDTO.Rate,
