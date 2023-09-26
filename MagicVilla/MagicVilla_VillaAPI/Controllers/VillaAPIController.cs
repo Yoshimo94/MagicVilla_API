@@ -131,7 +131,7 @@ namespace MagicVilla_VillaAPI.Controllers
         }
 
         [HttpDelete("{id:int}", Name = "DeleteVilla")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> DeleteVilla(int id)
@@ -172,9 +172,9 @@ namespace MagicVilla_VillaAPI.Controllers
                     return BadRequest();
                 }
 
-                Villa model = _mapper.Map<Villa>(updateDTO);
+                Villa villa = _mapper.Map<Villa>(updateDTO);
 
-                await _dbVilla.UpdateAsync(model);
+                await _dbVilla.UpdateAsync(villa);
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;
                 return Ok(_response);
