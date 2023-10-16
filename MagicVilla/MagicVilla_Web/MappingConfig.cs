@@ -2,7 +2,7 @@
 using MagicVilla_Web.Model;
 using MagicVilla_Web.Model.Dto;
 
-namespace MagicVilla_VillaAPI
+namespace MagicVilla_Web
 {
     public class MappingConfig : Profile
     {

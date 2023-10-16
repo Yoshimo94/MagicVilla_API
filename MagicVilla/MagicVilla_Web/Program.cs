@@ -1,4 +1,4 @@
-using MagicVilla_VillaAPI;
+using MagicVilla_Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
