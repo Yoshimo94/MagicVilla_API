@@ -1,3 +1,4 @@
+using AutoMapper;
 using MagicVilla_Web;
 using MagicVilla_Web.Services;
 using MagicVilla_Web.Services.IServices;

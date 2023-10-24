@@ -1,3 +1,4 @@
+using AutoMapper;
 using MagicVilla_VillaAPI;
 using MagicVilla_VillaAPI.Data;
 using MagicVilla_VillaAPI.Logging;
