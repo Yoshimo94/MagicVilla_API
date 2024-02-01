@@ -13,10 +13,10 @@ namespace MagicVilla_VillaAPI.Controllers
         private readonly IUserRepository _userRepo;
         private readonly APIResponse _response;
 
-        public UserController(IUserRepository userRepo, APIResponse response)
+        public UserController(IUserRepository userRepo)
         {
             _userRepo = userRepo;
-            _response = response;
+            this._response = new();
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDTO model)
@@ -47,7 +47,7 @@ namespace MagicVilla_VillaAPI.Controllers
                 return BadRequest(_response);
             }
             var user = await _userRepo.Register(model);
-            if (user != null)
+            if (user == null)
             {
                 _response.StatusCode = HttpStatusCode.BadRequest;
                 _response.IsSuccess = false;
