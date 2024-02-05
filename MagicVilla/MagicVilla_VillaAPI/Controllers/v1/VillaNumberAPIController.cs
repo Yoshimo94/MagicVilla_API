@@ -8,7 +8,7 @@ using System.Net;
 using MagicVilla_VillaAPI.Repository;
 using Microsoft.AspNetCore.Authorization;
 
-namespace MagicVilla_VillaAPI.Controllers
+namespace MagicVilla_VillaAPI.Controllers.v1
 {
     [Route("api/v{version:apiVersion}/VillaNumberAPI")]
     [ApiVersion("1.0")]
