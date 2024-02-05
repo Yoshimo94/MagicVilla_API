@@ -1,20 +1,28 @@
 ﻿@model IEnumerable<MagicVilla_Web.Model.Dto.VillaNumberDTO>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpAcc
+@using MagicVilla_Utility
+
 <br />
 <div class="container p-4 border">
     <div class="row pb-2">
         <div class="col">
             <h1 class="text-primary">Villa Number List</h1>
         </div>
-        <div class="col text-end pt-1">
-            <a asp-controller="VillaNumber" asp-action="CreateVillaNumber" class="btn btn-outline-primary"><i class="bi bi-plus-square-fill"></i>Create New Villa Number</a>
-        </div>
+        @if (httpAcc.HttpContext.Session.GetString(SD.SessionToken) != null &&
+        httpAcc.HttpContext.Session.GetString(SD.SessionToken).ToString().Length > 0)
+        {
+            <div class="col text-end pt-1">
+                <a asp-controller="VillaNumber" asp-action="CreateVillaNumber" class="btn btn-outline-primary"><i class="bi bi-plus-square-fill"></i>Create New Villa Number</a>
+            </div>
+        }
+
     </div>
 
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    Villa Name 
+                    Villa Name
                 </th>
                 <th>
                     Villa Number
@@ -23,14 +31,18 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(var item in Model)
+            @foreach (var item in Model)
             {
                 <tr>
                     <td>@item.Villa.Name</td>
                     <td>@item.VillaNo</td>
                     <td>
-                        <a asp-controller="VillaNumber" asp-action="UpdateVillaNumber" asp-route-villaNo="@item.VillaNo" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
-                        <a asp-controller="VillaNumber" asp-action="DeleteVillaNumber" asp-route-villaId="@item.VillaNo" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+                        @if (httpAcc.HttpContext.Session.GetString(SD.SessionToken) != null &&
+                       httpAcc.HttpContext.Session.GetString(SD.SessionToken).ToString().Length > 0)
+                        {
+                            <a asp-controller="VillaNumber" asp-action="UpdateVillaNumber" asp-route-villaNo="@item.VillaNo" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+                            <a asp-controller="VillaNumber" asp-action="DeleteVillaNumber" asp-route-villaId="@item.VillaNo" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+                        }
                     </td>
                 </tr>
             }
